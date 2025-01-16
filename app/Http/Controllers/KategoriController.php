@@ -40,7 +40,7 @@ class KategoriController extends Controller
                 $id = $row->id;
                 $data = '
 
-                <a class="btn btn-sm btn-success btn-icon edit-button" data-id="' . $id . '" href="#">
+                <a class="btn btn-sm btn-primary btn-icon edit-button" data-id="' . $id . '" href="#">
                     <i class="fa fa-pencil"></i>
                 </a>
                 <a class="btn btn-sm btn-danger btn-icon delete-kategori" data-id="' . $id . '" href="' . route('kategori.destroy', $id) . '">

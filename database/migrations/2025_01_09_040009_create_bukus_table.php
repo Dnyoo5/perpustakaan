@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('judul');
             $table->string('gambar');
             $table->string('penulis');
-            $table->year('tahun_terbit');
+            $table->integer('kode_buku');
+            $table->string('pdf')->nullable();
+            $table->text('sinopsis');
+            $table->date('tahun_terbit');
             $table->unsignedBigInteger('kategori_id');
             $table->integer('stok');
 

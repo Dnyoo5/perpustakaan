@@ -15,9 +15,8 @@
                             <span class="path2"></span>
                         </i>
                     </div>
-                    <a href="index.html">
-                        <img alt="Logo" src="assets/media/logos/demo11.svg"
-                            class="theme-light-show h-20px h-lg-30px" />
+                    <a href="{{ route('dashboard') }}">
+                        <h3>PERPUSTAKAAN</h3>
                     </a>
                 </div>
                 <div class="d-flex align-items-center flex-shrink-0">
@@ -89,14 +88,16 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link py-3">
+                                    <a class="menu-link py-3" href="{{ route('buku') }}">
                                         <span class="menu-icon">
-                                            <i class="ki-duotone ki-switch fs-2">
+                                            <i class="ki-duotone ki-book fs-2">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="path4"></span>
                                             </i>
                                         </span>
-                                        <span class="menu-title">Layout Builder</span>
+                                        <span class="menu-title">Katalog Buku</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">

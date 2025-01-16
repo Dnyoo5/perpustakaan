@@ -87,6 +87,7 @@
     <script src="{{ asset('assets/js/custom/utilities/modals/offer-a-deal/complete.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/offer-a-deal/main.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
+
     <script>
         $(document).ready(function() {
             $('#logout-button').on('click', function(e) {

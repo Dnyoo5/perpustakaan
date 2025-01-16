@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LandingController;
@@ -21,17 +22,17 @@ Route::get('/', [AuthController::class, 'showLogin'])->name('login.form');
 Route::post('/', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     });
 
-    Route::prefix('home')->group(function() {
+    Route::prefix('home')->group(function () {
         Route::get('/', [LandingController::class, 'index'])->name('home');
     });
 
-    Route::prefix('kategori')->group(function() {
+    Route::prefix('kategori')->group(function () {
         Route::get('/', [KategoriController::class, 'index'])->name('kategori');
         Route::post('/', [KategoriController::class, 'store'])->name('kategori.store');
         Route::get('/create', [KategoriController::class, 'create'])->name('kategori.create');
@@ -41,9 +42,14 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/datatables', [KategoriController::class, 'datatables'])->name('kategori.datatables');
     });
 
-
-
-
+    Route::prefix('buku')->group(function () {
+        Route::get('/', [BukuController::class, 'index'])->name('buku');
+        Route::post('/', [BukuController::class, 'store'])->name('buku.store');
+        Route::get('/create', [BukuController::class, 'create'])->name('buku.create');
+        Route::get('/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
+        Route::put('/{id}', [BukuController::class, 'update'])->name('buku.update');
+        Route::get('/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
+        Route::get('/datatables', [BukuController::class, 'datatables'])->name('buku.datatables');
+    });
 
 });
-
