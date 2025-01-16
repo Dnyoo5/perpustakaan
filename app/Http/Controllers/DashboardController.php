@@ -13,7 +13,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $data['main'] = 'Dashboard';
+        $data['sub']  = 'Home';
+        $data['sub1']  = 'Dashboard Home';
+        return view('dashboard.index',$data);
     }
 
     /**

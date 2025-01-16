@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::prefix('home')->group(function() {
         Route::get('/', [LandingController::class, 'index'])->name('home');
     });
+
+    Route::prefix('kategori')->group(function() {
+        Route::get('/', [KategoriController::class, 'index'])->name('kategori');
+        Route::post('/', [KategoriController::class, 'store'])->name('kategori.store');
+        Route::get('/create', [KategoriController::class, 'create'])->name('kategori.create');
+        Route::get('/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
+        Route::put('/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+        Route::get('/destroy/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+        Route::get('/datatables', [KategoriController::class, 'datatables'])->name('kategori.datatables');
+    });
+
+
 
 
 

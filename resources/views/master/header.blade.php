@@ -100,7 +100,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link py-3">
+                                    <a class="menu-link py-3" href="{{ route('kategori') }}">
                                         <span class="menu-icon">
                                             <i class="ki-duotone ki-code fs-2">
                                                 <span class="path1"></span>
@@ -109,7 +109,7 @@
                                                 <span class="path4"></span>
                                             </i>
                                         </span>
-                                        <span class="menu-title">Changelog v8.2.6</span>
+                                        <span class="menu-title">Katalog Kategori</span>
                                     </a>
 
                                 </div>
@@ -253,27 +253,3 @@
                 </div>
             </div>
         </div>
-
-        @section('script')
-            <script>
-                $(document).ready(function() {
-                    $('#logout-button').on('click', function(e) {
-                        e.preventDefault();
-                        Swal.fire({
-                            title: 'Konfirmasi Logout',
-                            text: 'Apakah Anda Yakin Akan Logout?',
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Ya, Logout',
-                            cancelButtonText: 'Batal'
-                        }).then((result) => {
-                            if(result.isConfirmed) {
-                                $('#logout-form').submit();
-                            }
-                        });
-                    });
-                });
-            </script>
-        @endsection
