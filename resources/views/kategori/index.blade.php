@@ -12,7 +12,7 @@
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bold text-gray-800">Katalog Kategori</span>
-                                <span class="text-gray-500 mt-1 fw-semibold fs-6">Total 424,567 deliveries</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">Total Kategori {{ $totalKategori }}</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Toolbar-->
@@ -106,10 +106,10 @@
             </div>
 
             <div class="modal fade" tabindex="-1" id="editDropModal">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Edit Data Barang</h3>
+                            <h3 class="modal-title">Edit Kategori</h3>
                             <button type="button" class="btn btn-icon btn-sm btn-active-light-primary ms-2"
                                 data-bs-dismiss="modal" aria-label="Close">
                                 <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span

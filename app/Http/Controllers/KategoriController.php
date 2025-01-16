@@ -16,9 +16,13 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        $totalKategori = Kategori::count();
+
+        // Siapkan data untuk view
         $data['main'] = 'Kategori';
         $data['sub']  = 'Home';
         $data['sub1']  = 'Kategori Home';
+        $data['totalKategori'] = $totalKategori;
 
         return view('kategori.index', $data);
     }
