@@ -29,193 +29,114 @@
                                         Tambah Buku
                                     </button>
                                 </a>
-                                <a href="{{ route('buku.create') }}">
-                                    <button class="btn btn-light btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_1">
-                                        <i class="ki-duotone ki-plus-square fs-2">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                        Tambah Buku
-                                    </button>
-                                </a>
+
                             </div>
                             <!--end::Toolbar-->
                         </div>
                         <!--end::Header-->
 
+
+
                         <!--begin::Card body-->
                         <div class="card-body pt-7">
-                            <!--begin::Row-->
                             <div class="row g-5 g-xl-9 mb-5 mb-xl-9">
-                                <!--begin::Col-->
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                    <!--begin::Player card-->
-                                    <div class="m-0">
-                                        <!--begin::User pic-->
-                                        <div class="card-rounded position-relative mb-5">
-                                            <!--begin::Img-->
-                                            <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-200px card-rounded"
-                                                style="background-image:url('assets/media/stock/600x600/img-61.jpg')">
+                                @foreach ($buku as $item)
+                                    <div class="col-md-6 mb-5">
+
+                                        <div class="card-body py-9">
+                                            <!--begin::Row-->
+                                            <div class="row gx-9 h-100">
+                                                <!--begin::Col (Image)-->
+                                                <div class="col-sm-6 mb-10 mb-sm-0">
+                                                    <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-300px min-h-sm-150 h-150"
+                                                        style="background-size: 100% 100%;background-image:url('{{ asset('storage/' . $item->gambar) }}')">
+                                                    </div>
+                                                </div>
+                                                <!--end::Col-->
+
+                                                <!--begin::Col (Details)-->
+                                                <div class="col-sm-6">
+                                                    <!--begin::Wrapper-->
+                                                    <div class="d-flex flex-column h-100">
+                                                        <!--begin::Header-->
+                                                        <div class="mb-7">
+                                                            <!--begin::Headin-->
+                                                            <div class="d-flex flex-stack mb-6">
+                                                                <!--begin::Title-->
+                                                                <div class="flex-shrink-0 me-5">
+                                                                    <span class="text-gray-500 fs-7 fw-bold me-2 d-block lh-1 pb-1">
+                                                                        {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
+                                                                    </span>
+                                                                    <span class="text-gray-800 fs-1 fw-bold">
+                                                                        {{ $item->judul }}
+                                                                    </span>
+                                                                    <br>
+                                                                    <span class="text-gray-900 fs-4 fw-semibold">
+                                                                        {{ $item-> }}
+                                                                    </span>
+                                                                </div>
+                                                                <!--end::Title-->
+
+
+                                                            </div>
+                                                            <!--end::Heading-->
+
+                                                            <!--begin::Items-->
+                                                            <div class="d-flex align-items-center flex-wrap d-grid gap-2">
+                                                                <div class="d-flex align-items-center">
+
+                                                                    <div class="m-0">
+                                                                        <span
+                                                                            class="fw-semibold text-gray-500 d-block fs-8">Penulis</span>
+                                                                        <span
+                                                                            class="fw-bold text-gray-800 fs-7">{{ $item->penulis }}</span>
+                                                                    </div>
+                                                                    <!--end::Info-->
+                                                                </div>
+                                                                <!--end::Item-->
+                                                            </div>
+                                                            <!--end::Items-->
+                                                        </div>
+                                                        <!--end::Header-->
+
+                                                        <!--begin::Body-->
+                                                        <div class="mb-6">
+                                                            <!--begin::Text-->
+                                                            <span class="fw-semibold text-gray-600 fs-6 mb-8 d-block">
+                                                                Flat cartoony illustrations with vivid
+                                                                unblended colors and asymmetrical beautiful purple hair lady
+                                                            </span>
+                                                            <!--end::Text-->
+
+                                                            <!--begin::Stats-->
+                                                            <div class="d-flex">
+                                                                <!--begin::Stat-->
+                                                                <div
+                                                                    class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+                                                                    <!--begin::Date-->
+                                                                    <span class="fs-6 text-gray-700 fw-bold">{{ $item->tahun_terbit }}</span>
+                                                                    <!--end::Date-->
+
+                                                                    <!--begin::Label-->
+                                                                    <div class="fw-semibold text-gray-500">Tahun Terbit</div>
+                                                                </div>
+                                                                <div
+                                                                    class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 mb-3">
+                                                                    <!--begin::Number-->
+                                                                    <span class="fs-6 text-gray-700 fw-bold">{{ $item->stok }}</span>
+                                                                    <div class="fw-semibold text-gray-500">Stok Buku</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <!--end::Img-->
-
-                                            <!--begin::Play-->
-                                            <button
-                                                class="btn btn-icon h-auto w-auto p-0 ms-4 mb-4 position-absolute bottom-0 right-0"
-                                                data-kt-element="list-play-button">
-                                                <i class="bi bi-play-fill text-white fs-2x"
-                                                    data-kt-element="list-play-icon"></i>
-                                                <i class="bi bi-pause-fill text-white fs-2x d-none"
-                                                    data-kt-element="list-pause-icon"></i>
-                                            </button>
-                                            <!--end::Play-->
                                         </div>
-                                        <!--end::User pic-->
 
-                                        <!--begin::Info-->
-                                        <div class="m-0">
-                                            <!--begin::Title-->
-                                            <a href="#"
-                                                class="text-gray-800 text-hover-primary fs-3 fw-bold d-block mb-2">Daily
-                                                Podcast</a>
-                                            <!--end::Title-->
-
-                                            <span class="fw-bold fs-6 text-gray-500 d-block lh-1">Darlene Robertson</span>
-                                        </div>
-                                        <!--end::Info-->
                                     </div>
-                                    <!--end::Player card-->
-                                </div>
-                                <!--end::Col-->
-
-                                <!--begin::Col-->
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                    <!--begin::Player card-->
-                                    <div class="m-0">
-                                        <!--begin::User pic-->
-                                        <div class="card-rounded position-relative mb-5">
-                                            <!--begin::Img-->
-                                            <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-200px card-rounded"
-                                                style="background-image:url('assets/media/stock/600x600/img-60.jpg')">
-                                            </div>
-                                            <!--end::Img-->
-
-                                            <!--begin::Play-->
-                                            <button
-                                                class="btn btn-icon h-auto w-auto p-0 ms-4 mb-4 position-absolute bottom-0 right-0"
-                                                data-kt-element="list-play-button">
-                                                <i class="bi bi-play-fill text-white fs-2x"
-                                                    data-kt-element="list-play-icon"></i>
-                                                <i class="bi bi-pause-fill text-white fs-2x d-none"
-                                                    data-kt-element="list-pause-icon"></i>
-                                            </button>
-                                            <!--end::Play-->
-                                        </div>
-                                        <!--end::User pic-->
-
-                                        <!--begin::Info-->
-                                        <div class="m-0">
-                                            <!--begin::Title-->
-                                            <a href="#"
-                                                class="text-gray-800 text-hover-primary fs-3 fw-bold d-block mb-2">Neon
-                                                Lights</a>
-                                            <!--end::Title-->
-
-                                            <span class="fw-bold fs-6 text-gray-500 d-block lh-1">Wade Warren</span>
-                                        </div>
-                                        <!--end::Info-->
-                                    </div>
-                                    <!--end::Player card-->
-                                </div>
-                                <!--end::Col-->
-
-                                <!--begin::Col-->
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                    <!--begin::Player card-->
-                                    <div class="m-0">
-                                        <!--begin::User pic-->
-                                        <div class="card-rounded position-relative mb-5">
-                                            <!--begin::Img-->
-                                            <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-200px card-rounded"
-                                                style="background-image:url('assets/media/stock/600x600/img-63.jpg')">
-                                            </div>
-                                            <!--end::Img-->
-
-                                            <!--begin::Play-->
-                                            <button
-                                                class="btn btn-icon h-auto w-auto p-0 ms-4 mb-4 position-absolute bottom-0 right-0"
-                                                data-kt-element="list-play-button">
-                                                <i class="bi bi-play-fill text-white fs-2x"
-                                                    data-kt-element="list-play-icon"></i>
-                                                <i class="bi bi-pause-fill text-white fs-2x d-none"
-                                                    data-kt-element="list-pause-icon"></i>
-                                            </button>
-                                            <!--end::Play-->
-                                        </div>
-                                        <!--end::User pic-->
-
-                                        <!--begin::Info-->
-                                        <div class="m-0">
-                                            <!--begin::Title-->
-                                            <a href="#"
-                                                class="text-gray-800 text-hover-primary fs-3 fw-bold d-block mb-2">Single
-                                                Eye</a>
-                                            <!--end::Title-->
-
-                                            <span class="fw-bold fs-6 text-gray-500 d-block lh-1">Robert Fox</span>
-                                        </div>
-                                        <!--end::Info-->
-                                    </div>
-                                    <!--end::Player card-->
-                                </div>
-                                <!--end::Col-->
-
-                                <!--begin::Col-->
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                    <!--begin::Player card-->
-                                    <div class="m-0">
-                                        <!--begin::User pic-->
-                                        <div class="card-rounded position-relative mb-5">
-                                            <!--begin::Img-->
-                                            <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-200px card-rounded"
-                                                style="background-image:url('assets/media/stock/600x600/img-56.jpg')">
-                                            </div>
-                                            <!--end::Img-->
-
-                                            <!--begin::Play-->
-                                            <button
-                                                class="btn btn-icon h-auto w-auto p-0 ms-4 mb-4 position-absolute bottom-0 right-0"
-                                                data-kt-element="list-play-button">
-                                                <i class="bi bi-play-fill text-white fs-2x"
-                                                    data-kt-element="list-play-icon"></i>
-                                                <i class="bi bi-pause-fill text-white fs-2x d-none"
-                                                    data-kt-element="list-pause-icon"></i>
-                                            </button>
-                                            <!--end::Play-->
-                                        </div>
-                                        <!--end::User pic-->
-
-                                        <!--begin::Info-->
-                                        <div class="m-0">
-                                            <!--begin::Title-->
-                                            <a href="#"
-                                                class="text-gray-800 text-hover-primary fs-3 fw-bold d-block mb-2">Radiohead</a>
-                                            <!--end::Title-->
-
-                                            <span class="fw-bold fs-6 text-gray-500 d-block lh-1">Jacob Jones</span>
-                                        </div>
-                                        <!--end::Info-->
-                                    </div>
-                                    <!--end::Player card-->
-                                </div>
-                                <!--end::Col-->
+                                @endforeach
                             </div>
-                            <!--end::Row-->
 
-
-                            <!--end::Row-->
                         </div>
                         <!--end::Card body-->
                     </div>
