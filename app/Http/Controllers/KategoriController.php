@@ -18,6 +18,7 @@ class KategoriController extends Controller
     {
         $totalKategori = Kategori::count();
 
+
         // Siapkan data untuk view
         $data['main'] = 'Kategori';
         $data['sub']  = 'Home';
@@ -34,6 +35,7 @@ class KategoriController extends Controller
             ->select('id', 'nama', 'deskripsi', 'created_at', 'updated_at')
             ->get();
 
+            // dd($kategoris);
         return DataTables::of($kategoris)
             ->addIndexColumn()
             ->addColumn('aksi', function ($row) {

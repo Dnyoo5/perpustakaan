@@ -73,7 +73,7 @@
                                                 <span class="path2"></span>
                                             </i>
                                         </span>
-                                        <span class="menu-title">Components</span>
+                                        <span class="menu-title">Riwayat</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">
@@ -84,7 +84,7 @@
                                                 <span class="path2"></span>
                                             </i>
                                         </span>
-                                        <span class="menu-title">Documentation</span>
+                                        <span class="menu-title">Peminjaman Buku</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">

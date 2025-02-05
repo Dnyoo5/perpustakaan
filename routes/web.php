@@ -5,6 +5,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\PeminjamanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,10 +47,22 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [BukuController::class, 'index'])->name('buku');
         Route::post('/', [BukuController::class, 'store'])->name('buku.store');
         Route::get('/create', [BukuController::class, 'create'])->name('buku.create');
+        Route::get('/show/{id}', [BukuController::class, 'show'])->name('buku.show');
         Route::get('/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
         Route::put('/{id}', [BukuController::class, 'update'])->name('buku.update');
-        Route::get('/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
-        Route::get('/datatables', [BukuController::class, 'datatables'])->name('buku.datatables');
+        Route::delete('/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
+    });
+
+
+    Route::prefix('peminjaman')->group(function () {
+        Route::get('/', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+        Route::get('/create', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+        Route::post('/', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+        Route::get('/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
+        Route::put('/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
+        Route::delete('/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+        Route::post('/{id}/approve', [PeminjamanController::class, 'approve'])->name('peminjaman.approve');
+        Route::post('/{id}/return', [PeminjamanController::class, 'return'])->name('peminjaman.return');
     });
 
 });

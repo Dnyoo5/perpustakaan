@@ -64,7 +64,8 @@
                                                             <div class="d-flex flex-stack mb-6">
                                                                 <!--begin::Title-->
                                                                 <div class="flex-shrink-0 me-5">
-                                                                    <span class="text-gray-500 fs-7 fw-bold me-2 d-block lh-1 pb-1">
+                                                                    <span
+                                                                        class="text-gray-500 fs-7 fw-bold me-2 d-block lh-1 pb-1">
                                                                         {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
                                                                     </span>
                                                                     <span class="text-gray-800 fs-1 fw-bold">
@@ -72,7 +73,7 @@
                                                                     </span>
                                                                     <br>
                                                                     <span class="text-gray-900 fs-4 fw-semibold">
-                                                                        {{ $item-> }}
+                                                                        {{ $item->deskripsi }}
                                                                     </span>
                                                                 </div>
                                                                 <!--end::Title-->
@@ -103,8 +104,7 @@
                                                         <div class="mb-6">
                                                             <!--begin::Text-->
                                                             <span class="fw-semibold text-gray-600 fs-6 mb-8 d-block">
-                                                                Flat cartoony illustrations with vivid
-                                                                unblended colors and asymmetrical beautiful purple hair lady
+                                                                {{ Str::limit($item->sinopsis, 120) }}
                                                             </span>
                                                             <!--end::Text-->
 
@@ -114,19 +114,58 @@
                                                                 <div
                                                                     class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
                                                                     <!--begin::Date-->
-                                                                    <span class="fs-6 text-gray-700 fw-bold">{{ $item->tahun_terbit }}</span>
+                                                                    <span
+                                                                        class="fs-6 text-gray-700 fw-bold">{{ $item->tahun_terbit }}</span>
                                                                     <!--end::Date-->
 
                                                                     <!--begin::Label-->
-                                                                    <div class="fw-semibold text-gray-500">Tahun Terbit</div>
+                                                                    <div class="fw-semibold text-gray-500">Tahun Terbit
+                                                                    </div>
                                                                 </div>
                                                                 <div
                                                                     class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 mb-3">
                                                                     <!--begin::Number-->
-                                                                    <span class="fs-6 text-gray-700 fw-bold">{{ $item->stok }}</span>
+                                                                    <span
+                                                                        class="fs-6 text-gray-700 fw-bold">{{ $item->stok }}</span>
                                                                     <div class="fw-semibold text-gray-500">Stok Buku</div>
                                                                 </div>
                                                             </div>
+                                                            <a href="{{ route('buku.edit', $item->id) }}"
+                                                                class="btn btn-sm btn-primary"><i
+                                                                    class="ki-duotone ki-pencil fs-2 text-ligt">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i></a>
+                                                            <a href="{{ route('buku.show', $item->id) }}"
+                                                                class="btn btn-sm btn-info"><i
+                                                                    class="ki-duotone ki-eye fs-2 text-light ">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                    <span class="path3"></span>
+                                                                </i></a>
+                                                            <form id="delete-form-{{ $item->id }}"
+                                                                action="{{ route('buku.destroy', $item->id) }}"
+                                                                method="POST" style="display: inline-block;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-danger delete-btn"
+                                                                    data-id="{{ $item->id }}">
+                                                                    <i class="ki-duotone ki-trash fs-2 text-light">
+                                                                        <span class="path1"></span>
+                                                                        <span class="path2"></span>
+                                                                        <span class="path3"></span>
+                                                                        <span class="path4"></span>
+                                                                        <span class="path5"></span>
+                                                                    </i>
+                                                                </button>
+                                                            </form>
+                                                            <a href="{{ route('buku.show', $item->id) }}"
+                                                                class="btn btn-sm btn-success"><i
+                                                                    class="ki-duotone ki-arrow-right-left fs-2 text-light">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -138,6 +177,8 @@
                             </div>
 
                         </div>
+
+
                         <!--end::Card body-->
                     </div>
                     <!--end::Player widget 1-->
@@ -153,4 +194,29 @@
     </div>
     </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('.delete-btn').on('click', function() {
+                var bookId = $(this).data('id'); // Ambil ID buku
+                var form = $('#delete-form-' + bookId); // Ambil form sesuai ID
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda tidak dapat mengembalikan data ini!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit(); // Submit form jika dikonfirmasi
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
