@@ -160,7 +160,7 @@
                                                                     </i>
                                                                 </button>
                                                             </form>
-                                                            <a href="{{ route('buku.show', $item->id) }}"
+                                                            <a href="{{ route('peminjaman.create') }}"
                                                                 class="btn btn-sm btn-success"><i
                                                                     class="ki-duotone ki-arrow-right-left fs-2 text-light">
                                                                     <span class="path1"></span>

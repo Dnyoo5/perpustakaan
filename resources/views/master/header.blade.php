@@ -77,14 +77,16 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link py-3">
+                                    <a class="menu-link py-3" href="{{ route('peminjaman.index') }}">
                                         <span class="menu-icon">
-                                            <i class="ki-duotone ki-abstract-26 fs-2">
+                                            <i class="ki-duotone ki-book fs-2">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="path4"></span>
                                             </i>
                                         </span>
-                                        <span class="menu-title">Peminjaman Buku</span>
+                                        <span class="menu-title">Peminjaman</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">

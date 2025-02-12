@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('peminjaman')->group(function () {
         Route::get('/', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+        Route::get('/datatables', [PeminjamanController::class, 'peminjaman'])->name('peminjaman.datatables');
         Route::get('/create', [PeminjamanController::class, 'create'])->name('peminjaman.create');
         Route::post('/', [PeminjamanController::class, 'store'])->name('peminjaman.store');
         Route::get('/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
