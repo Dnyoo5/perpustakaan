@@ -9,7 +9,7 @@ class Peminjaman extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','buku_id','tanggal_pinjam','tanggal_kembali','status'];
+    protected $fillable = ['user_id','buku_id','tanggal_pinjam','dipinjam','tanggal_kembali','status'];
 
     public function user() {
         return $this->belongsTo(User::class);

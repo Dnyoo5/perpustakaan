@@ -17,24 +17,25 @@
                             @csrf
                             <div class="card-body">
                                 <div class="row g-5">
+
                                     <!-- Pilih Ruangan -->
                                     <!-- Pilih Ruangan -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="jumlah_rusak" class="required">Nama Peminjam</label>
-                                            <input type="text" name="jumlah_rusak" class="form-control" id="jumlah_rusak"
-                                                value="{{ old('jumlah_rusak') }}" required />
-                                            @error('jumlah_rusak')
+                                            <label for="nama_peminjam" class="required">Nama Peminjam</label>
+                                            <input type="text" name="nama_peminjam" class="form-control"
+                                                id="nama_peminjam" value="{{ auth()->user()->nama }}" readonly />
+                                            @error('nama_peminjam')
                                                 <span class="text-danger small">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="jumlah_rusak" class="required">Email Peminjam</label>
-                                            <input type="text" name="jumlah_rusak" class="form-control" id="jumlah_rusak"
-                                                value="{{ old('jumlah_rusak') }}" required />
-                                            @error('jumlah_rusak')
+                                            <label for="email_peminjam" class="required">Email Peminjam</label>
+                                            <input type="email" name="email_peminjam" class="form-control"
+                                                id="email_peminjam" value="{{ auth()->user()->email }}" readonly />
+                                            @error('email_peminjam')
                                                 <span class="text-danger small">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -43,12 +44,10 @@
                                     <!-- Pilih Barang -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="barang" class="required">Kode Buku</label>
-                                            <select name="barang_id" class="form-select" id="barang" required
-                                                data-control="select2">
-                                                <option value="">Pilih Barang</option>
-                                            </select>
-                                            @error('barang_id')
+                                            <label for="kode_buku" class="required">Kode Buku</label>
+                                            <input type="text" name="kode_buku" class="form-control" id="kode_buku"
+                                                value="{{ $buku->kode_buku ?? '' }}" readonly />
+                                            @error('kode_buku')
                                                 <span class="text-danger small">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -58,14 +57,16 @@
                                     <!-- Jumlah Rusak -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="tanggal_laporan" class="required">Jumlah Buku Dipinjam</label>
-                                            <input type="text" name="tanggal_laporan" class="form-control"
-                                                value="{{ old('tanggal_laporan') }}" required />
-                                            @error('tanggal_laporan')
+                                            <label for="jumlah_dipinjam" class="required">Jumlah Buku Dipinjam</label>
+                                            <input type="number" id="jumlah_dipinjam" name="jumlah_dipinjam"
+                                                class="form-control" value="{{ old('jumlah_dipinjam') }}"
+                                                placeholder="Masukkan jumlah buku yang ingin dipinjam" required />
+                                            @error('jumlah_dipinjam')
                                                 <span class="text-danger small">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="tanggal_peminjaman" class="required">Tanggal Peminjaman</label>
@@ -81,8 +82,7 @@
                                         <div class="form-group">
                                             <label for="tanggal_pengembalian" class="required">Tanggal Pengembalian</label>
                                             <input type="text" name="tanggal_pengembalian" class="form-control"
-                                                id="tanggal_pengembalian"
-                                                required readonly />
+                                                id="tanggal_pengembalian" />
                                             @error('tanggal_pengembalian')
                                                 <span class="text-danger small">{{ $message }}</span>
                                             @enderror
@@ -94,15 +94,7 @@
 
 
                                     <!-- Keterangan -->
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="keterangan">Keterangan</label>
-                                            <textarea name="keterangan" class="form-control" id="keterangan" placeholder="Masukkan keterangan jika diperlukan">{{ old('keterangan') }}</textarea>
-                                            @error('keterangan')
-                                                <span class="text-danger small">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
+
 
                                 </div>
                             </div>
@@ -151,7 +143,80 @@
                     dateFormat: 'Y-m-d',
                     altInput: true,
                     altFormat: 'd F Y',
-                    defaultDate: new Date(), // Default kosong
+                    defaultDate: (() => {
+                        let date = new Date();
+                        date.setDate(date.getDate() + 3);
+                        return date;
+                    })()
+                });
+            });
+
+            $(document).ready(function() {
+                // Ambil parameter 'id_buku' dari URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const idBuku = urlParams.get('id_buku');
+
+                // Set nilai input 'kode_buku' jika parameter ada
+                if (idBuku) {
+                    $('#kode_buku').val(idBuku);
+                }
+            });
+
+            $(document).ready(function() {
+                let timer; // Variabel untuk menyimpan setInterval
+                let previousValue = ''; // Untuk menyimpan nilai sebelumnya
+
+                // Event listener untuk input jumlah_dipinjam
+                $('#jumlah_dipinjam').on('input', function() {
+                    const kodeBuku = $('#kode_buku').val();
+                    const jumlahDipinjam = $(this).val();
+
+                    // Hentikan timer lama jika ada
+                    clearInterval(timer);
+
+                    // Mulai pengecekan setiap 2 detik
+                    timer = setInterval(() => {
+                        // Jika nilai input belum berubah, hentikan eksekusi
+                        if (jumlahDipinjam === previousValue || !jumlahDipinjam) return;
+                        previousValue = jumlahDipinjam; // Perbarui nilai sebelumnya
+
+                        // Kirim permintaan AJAX untuk memeriksa stok
+                        $.ajax({
+                            url: "{{ route('peminjaman.checkStok') }}",
+                            method: 'POST',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                kode_buku: kodeBuku,
+                                jumlah_dipinjam: jumlahDipinjam,
+                            },
+                            success: function(response) {
+                                if (response.status === 'error') {
+                                    // Tampilkan SweetAlert jika stok tidak mencukupi
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Stok Tidak Mencukupi',
+                                        text: response.message,
+                                    });
+
+                                    // Reset nilai input jumlah_dipinjam
+                                    $('#jumlah_dipinjam').val('');
+                                }
+                            },
+                            error: function(xhr) {
+                                // Tampilkan SweetAlert jika terjadi kesalahan
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Terjadi Kesalahan',
+                                    text: 'Gagal memeriksa stok buku. Silakan coba lagi.',
+                                });
+                            },
+                        });
+                    }, 100); // Interval waktu 2 detik
+                });
+
+                // Bersihkan interval jika pengguna keluar dari input field
+                $('#jumlah_dipinjam').on('blur', function() {
+                    clearInterval(timer);
                 });
             });
         </script>

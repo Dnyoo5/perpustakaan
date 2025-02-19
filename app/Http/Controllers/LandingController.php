@@ -13,7 +13,10 @@ class LandingController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $data['main'] = 'Home';
+        $data['sub']  = 'Home';
+        $data['sub1']  = '';
+        return view('home.index',$data);
     }
 
     public function create()

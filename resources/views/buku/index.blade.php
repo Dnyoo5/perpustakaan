@@ -18,6 +18,7 @@
 
                             <!--begin::Toolbar-->
                             <div class="card-toolbar">
+                                @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
                                 <a href="{{ route('buku.create') }}" style="margin-right: 10px">
                                     <button class="btn btn-light btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#kt_modal_1">
@@ -29,6 +30,7 @@
                                         Tambah Buku
                                     </button>
                                 </a>
+                                @endif
 
                             </div>
                             <!--end::Toolbar-->
@@ -130,12 +132,14 @@
                                                                     <div class="fw-semibold text-gray-500">Stok Buku</div>
                                                                 </div>
                                                             </div>
+                                                            @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
                                                             <a href="{{ route('buku.edit', $item->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
                                                                     class="ki-duotone ki-pencil fs-2 text-ligt">
                                                                     <span class="path1"></span>
                                                                     <span class="path2"></span>
                                                                 </i></a>
+                                                                @endif
                                                             <a href="{{ route('buku.show', $item->id) }}"
                                                                 class="btn btn-sm btn-info"><i
                                                                     class="ki-duotone ki-eye fs-2 text-light ">
@@ -143,6 +147,7 @@
                                                                     <span class="path2"></span>
                                                                     <span class="path3"></span>
                                                                 </i></a>
+                                                                @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
                                                             <form id="delete-form-{{ $item->id }}"
                                                                 action="{{ route('buku.destroy', $item->id) }}"
                                                                 method="POST" style="display: inline-block;">
@@ -160,12 +165,13 @@
                                                                     </i>
                                                                 </button>
                                                             </form>
-                                                            <a href="{{ route('peminjaman.create') }}"
-                                                                class="btn btn-sm btn-success"><i
-                                                                    class="ki-duotone ki-arrow-right-left fs-2 text-light">
+                                                            @endif
+                                                            <a  href="{{ route('peminjaman.create', $item->id) }}" class="btn btn-sm btn-success pilih-buku">
+                                                                <i class="ki-duotone ki-arrow-right-left fs-2 text-light">
                                                                     <span class="path1"></span>
                                                                     <span class="path2"></span>
-                                                                </i></a>
+                                                                </i>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>

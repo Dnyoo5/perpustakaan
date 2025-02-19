@@ -66,7 +66,7 @@
                             <div
                                 class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
                                 <div class="menu-item">
-                                    <a class="menu-link py-3">
+                                    <a class="menu-link py-3" href="{{ route('peminjaman.riwayat.index') }}">
                                         <span class="menu-icon">
                                             <i class="ki-duotone ki-rocket fs-2">
                                                 <span class="path1"></span>

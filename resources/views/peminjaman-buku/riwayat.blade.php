@@ -31,7 +31,7 @@
                                         <th>Tanggal Peminjaman</th>
                                         <th>Tanggal Pengembalian</th>
                                         <th>Status</th>
-                                        <th>Aksi</th>
+
                                     </tr>
                                 </thead>
                             </table>
@@ -56,7 +56,7 @@
                 serverSide: true,
                 responsive: false, // Menambahkan opsi responsive
                 ajax: {
-                    url: "{{ route('peminjaman.datatables') }}",
+                    url: "{{ route('peminjaman.riwayat') }}",
                 },
                 columns: [{
                         data: "DT_RowIndex",
@@ -83,10 +83,7 @@
                         data: 'status_badge',
                         name: 'status'
                     }, // Gunakan status_badge
-                    {
-                        data: 'aksi',
-                        name: 'aksi'
-                    },
+
                 ],
                 order: [
                     [1, 'asc']
@@ -132,126 +129,10 @@
 
 
             // Handle form submit
-            $('form').on('submit', function(e) {
-                e.preventDefault();
-
-                $.ajax({
-                    url: $(this).attr('action'),
-                    method: 'POST',
-                    data: new FormData(this),
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: response.message
-                        }).then((result) => {
-                            window.location.href = '{{ route('peminjaman.index') }}';
-                        });
-                    },
-                    error: function(xhr) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: xhr.responseJSON.message
-                        });
-                    }
-                });
-            });
-
-            // Handle approve button
-            $(document).on('click', '.approve-button', function(e) {
-                e.preventDefault();
-                let id = $(this).data('id');
-
-                Swal.fire({
-                    title: 'Apakah anda yakin?',
-                    text: "Peminjaman akan disetujui",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, setujui!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: `/peminjaman/${id}/approve`,
-                            method: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}'
-                            },
-                            success: function(response) {
-                                Swal.fire(
-                                    'Berhasil!',
-                                    response.message,
-                                    'success'
-                                );
-                                table.ajax.reload();
-                            }
-                        });
-                    }
-                });
-            });
-
-            // Handle return button
-            $(document).on('click', '.return-button', function(e) {
-                e.preventDefault();
-                let id = $(this).data('id');
-
-                Swal.fire({
-                    title: 'Apakah anda yakin?',
-                    text: "Buku akan dikembalikan",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, kembalikan!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: `/peminjaman/${id}/return`,
-                            method: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}'
-                            },
-                            success: function(response) {
-                                Swal.fire(
-                                    'Berhasil!',
-                                    response.message,
-                                    'success'
-                                );
-                                table.ajax.reload();
-                            }
-                        });
-                    }
-                });
-            });
-
 
 
 
 
         });
-
-        $('body').on('click', '.delete-peminjaman', function(e) {
-                e.preventDefault();
-                var url = $(this).attr('href');
-                Swal.fire({
-                    title: 'Konfirmasi',
-                    text: "Anda yakin ingin menghapus kategori ini?",
-                    icon: 'warning',
-                    buttonsStyling: false,
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Tidak, kembali!',
-                    customClass: {
-                        confirmButton: 'btn btn-primary',
-                        cancelButton: 'btn btn-secondary'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = url;
-                    }
-                });
-            });
     </script>
 @endsection

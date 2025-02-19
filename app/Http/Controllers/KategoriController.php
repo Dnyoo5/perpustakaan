@@ -40,19 +40,27 @@ class KategoriController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($row) {
                 $id = $row->id;
-                $data = '
 
-                <a class="btn btn-sm btn-primary btn-icon edit-button" data-id="' . $id . '" href="#">
-                    <i class="fa fa-pencil"></i>
-                </a>
-                <a class="btn btn-sm btn-danger btn-icon delete-kategori" data-id="' . $id . '" href="' . route('kategori.destroy', $id) . '">
-                    <i class="fa fa-trash"></i>
-                </a>
-            ';
+                // Mulai dengan string kosong
+                $data = '';
+
+                // Cek apakah user adalah superadmin atau admin
+                if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin') {
+                    // Tombol edit dan delete hanya untuk superadmin dan admin
+                    $data .= '
+                        <a class="btn btn-sm btn-primary btn-icon edit-button" data-id="' . $id . '" href="#">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a class="btn btn-sm btn-danger btn-icon delete-kategori" data-id="' . $id . '" href="' . route('kategori.destroy', $id) . '">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    ';
+                }
 
                 return $data;
             })
-            ->rawColumns(['aksi']) // Aktifkan kolom 'aksi' agar mendukung HTML
+            ->rawColumns(['aksi'])
+             // Aktifkan kolom 'aksi' agar mendukung HTML
             ->toJson();
     }
 
@@ -165,7 +173,6 @@ class KategoriController extends Controller
         if (!$kategori) {
             return redirect()->route('kategori')->with('error', 'kategori tidak ditemukan.');
         }
-
         $kategori->delete();
         return redirect()->route('kategori')->with('success', 'Data Kategori berhasil dihapus.');
     }

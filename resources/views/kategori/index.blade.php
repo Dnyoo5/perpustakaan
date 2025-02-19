@@ -18,17 +18,19 @@
                             <!--begin::Toolbar-->
                             <div class="card-toolbar">
                                 <!--begin::Daterangepicker(defined in src/js/layout/app.js)-->
-                                <a href="#">
-                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_1">
-                                        <i class="ki-duotone ki-plus-square fs-2">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                        Tambah kategori
-                                    </button>
-                                </a>
+                                @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
+                                    <a href="#">
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#kt_modal_1">
+                                            <i class="ki-duotone ki-plus-square fs-2">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                            Tambah kategori
+                                        </button>
+                                    </a>
+                                @endif
                                 <!--end::Daterangepicker-->
                             </div>
                             <!--end::Toolbar-->
@@ -36,16 +38,16 @@
                         <!--end::Header-->
                         <!--begin::Body-->
                         <div class="card-body">
-                                <table class="table table-stripped" id="tabel_kategori">
-                                    <thead class="text-gray-500 fs-6 bg-primary">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Kategori</th>
-                                            <th>Deskripsi</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+                            <table class="table table-stripped" id="tabel_kategori">
+                                <thead class="text-gray-500 fs-6 bg-primary">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kategori</th>
+                                        <th>Deskripsi</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                            </table>
 
                         </div>
                         <!--end: Card Body-->
@@ -92,8 +94,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-light btn-sm"
-                                    data-bs-dismiss="modal">Kembali</button>
+                                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Kembali</button>
                                 <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                             </div>
                         </form>

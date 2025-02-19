@@ -56,14 +56,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('peminjaman')->group(function () {
         Route::get('/', [PeminjamanController::class, 'index'])->name('peminjaman.index');
-        Route::get('/datatables', [PeminjamanController::class, 'peminjaman'])->name('peminjaman.datatables');
-        Route::get('/create', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+        Route::get('/riwayat', [PeminjamanController::class, 'riwayat'])->name('peminjaman.riwayat');
+        Route::get('/melihat', [PeminjamanController::class, 'melihat'])->name('peminjaman.riwayat.index');
+        Route::get('/datatables', [PeminjamanController::class, 'datatables'])->name('peminjaman.datatables');
+        Route::get('/create/{id}', [PeminjamanController::class, 'create'])->name('peminjaman.create');
         Route::post('/', [PeminjamanController::class, 'store'])->name('peminjaman.store');
         Route::get('/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
         Route::put('/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
-        Route::delete('/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+        Route::get('/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
         Route::post('/{id}/approve', [PeminjamanController::class, 'approve'])->name('peminjaman.approve');
         Route::post('/{id}/return', [PeminjamanController::class, 'return'])->name('peminjaman.return');
+        Route::post('/check-stok', [PeminjamanController::class, 'checkStok'])->name('peminjaman.checkStok');
+
     });
 
 });

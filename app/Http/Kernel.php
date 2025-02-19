@@ -65,4 +65,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
     ];
+
+
+    protected $commands = [
+        \App\Console\Commands\UpdatePeminjamanDenda::class,
+    ];
 }

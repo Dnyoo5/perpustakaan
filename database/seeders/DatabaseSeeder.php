@@ -39,5 +39,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('member'), // Menggunakan Hash untuk enkripsi password
             'role' => 'member', // Role ditetapkan sebagai admin
         ]);
+        DB::table('users')->insert([
+            'email' => 'member1@mail.test',
+            'nama' => 'member1',
+            'alamat' => 'Bandung',
+            'password' => Hash::make('member1'), // Menggunakan Hash untuk enkripsi password
+            'role' => 'member', // Role ditetapkan sebagai admin
+        ]);
     }
 }
