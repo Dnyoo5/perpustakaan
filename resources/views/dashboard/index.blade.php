@@ -49,19 +49,13 @@
                                     <div class="card-header pt-7">
                                         <!--begin::Title-->
                                         <h3 class="card-title align-items-start flex-column">
-                                            <span class="card-label fw-bold text-gray-800">Delivery Tracking</span>
-                                            <span class="text-gray-500 mt-1 fw-semibold fs-6">56 deliveries in
-                                                progress</span>
+                                            <span class="card-label fw-bold text-gray-800">Buku dengan Kategori Terbanyak</span>
+                                           
                                         </h3>
                                         <!--end::Title-->
 
                                         <!--begin::Toolbar-->
-                                        <div class="card-toolbar">
-                                            <a href="#" class="btn btn-sm btn-light" data-bs-toggle="tooltip"
-                                                data-bs-dismiss="click" data-bs-custom-class="tooltip-inverse"
-                                                data-bs-original-title="Delivery App is coming soon"
-                                                data-kt-initialized="1">View All</a>
-                                        </div>
+                                       
                                         <!--end::Toolbar-->
                                     </div>
                                     <div class="card-body pb-0 pt-4">
@@ -81,237 +75,65 @@
                                     <!--begin::Header-->
                                     <div class="card-header pt-5">
                                         <!--begin::Title-->
-                                        <h3 class="card-title text-gray-800">Highlights</h3>
+                                        <h3 class="card-title text-gray-800">Buku Paling Banyak Dibaca</h3>
                                         <!--end::Title-->
-
-                                        <!--begin::Toolbar-->
-                                        <div class="card-toolbar d-none">
-                                            <!--begin::Daterangepicker(defined in src/js/layout/app.js)-->
-                                            <div data-kt-daterangepicker="true" data-kt-daterangepicker-opens="left"
-                                                class="btn btn-sm btn-light d-flex align-items-center px-4"
-                                                data-kt-initialized="1">
-                                                <!--begin::Display range-->
-                                                <div class="text-gray-600 fw-bold">9 Feb 2025 - 10 Mar 2025</div>
-                                                <!--end::Display range-->
-
-                                                <i class="ki-duotone ki-calendar-8 fs-1 ms-2 me-0"><span
-                                                        class="path1"></span><span class="path2"></span><span
-                                                        class="path3"></span><span class="path4"></span><span
-                                                        class="path5"></span><span class="path6"></span></i>
-                                            </div>
-                                            <!--end::Daterangepicker-->
-                                        </div>
-                                        <!--end::Toolbar-->
                                     </div>
                                     <!--end::Header-->
-
+                                
                                     <!--begin::Body-->
-                                    <div class="card-body pt-5 ">
-                                        <!--begin::Item-->
-                                        <div class="d-flex flex-stack">
-                                            <!--begin::Section-->
-                                            <div class="text-gray-700 fw-semibold fs-6 me-2">Avg. Client Rating</div>
-                                            <!--end::Section-->
-
-                                            <!--begin::Statistics-->
-                                            <div class="d-flex align-items-senter mb-7">
-                                                <i class="ki-duotone ki-arrow-up-right fs-2 text-success me-2"><span
-                                                        class="path1"></span><span class="path2"></span></i>
-
-                                                <!--begin::Number-->
-                                                <span class="text-gray-900 fw-bolder fs-6">7.8</span>
-                                                <!--end::Number-->
-
-                                                <span class="text-gray-500 fw-bold fs-6">/10</span>
-                                            </div>
-                                            <!--end::Statistics-->
-                                        </div>
-                                        <!--end::Item-->
-
-                                        <!--begin::Separator-->
-                                        <div class="separator separator-dashed my-3"></div>
-                                        <!--end::Separator-->
-
-                                        <!--begin::Item-->
-                                        <div class="d-flex flex-stack mb-5">
-                                            <!--begin::Section-->
-                                            <div class="text-gray-700 fw-semibold fs-6 me-2">Avg. Quotes</div>
-                                            <!--end::Section-->
-
-                                            <!--begin::Statistics-->
-                                            <div class="d-flex align-items-senter">
-                                                <i class="ki-duotone ki-arrow-down-right fs-2 text-danger me-2"><span
-                                                        class="path1"></span><span class="path2"></span></i>
-
-                                                <!--begin::Number-->
-                                                <span class="text-gray-900 fw-bolder fs-6">730</span>
-                                                <!--end::Number-->
-
-
-                                            </div>
-                                            <!--end::Statistics-->
-                                        </div>
-                                        <!--end::Item-->
-
-                                        <!--begin::Separator-->
-                                        <div class="separator separator-dashed my-3"></div>
-                                        <!--end::Separator-->
-
-                                        <!--begin::Item-->
-                                        <div class="d-flex flex-stack mb-7">
-                                            <!--begin::Section-->
-                                            <div class="text-gray-700 fw-semibold fs-6 me-2">Avg. Agent Earnings</div>
-                                            <!--end::Section-->
-
-                                            <!--begin::Statistics-->
-                                            <div class="d-flex align-items-senter">
-                                                <i class="ki-duotone ki-arrow-up-right fs-2 text-success me-2"><span
-                                                        class="path1"></span><span class="path2"></span></i>
-
-                                                <!--begin::Number-->
-                                                <span class="text-gray-900 fw-bolder fs-6">$2,309</span>
-                                                <!--end::Number-->
-
-
-                                            </div>
-                                            <!--end::Statistics-->
-                                        </div>
-                                        <div class="separator separator-dashed my-3"></div>
-                                        <!--end::Separator-->
-
-                                        <!--begin::Item-->
-                                        <div class="d-flex flex-stack">
-                                            <!--begin::Section-->
-                                            <div class="text-gray-700 fw-semibold fs-6 me-2">Avg. Agent Earnings</div>
-                                            <!--end::Section-->
-
-                                            <!--begin::Statistics-->
-                                            <div class="d-flex align-items-senter">
-                                                <i class="ki-duotone ki-arrow-up-right fs-2 text-success me-2"><span
-                                                        class="path1"></span><span class="path2"></span></i>
-
-                                                <!--begin::Number-->
-                                                <span class="text-gray-900 fw-bolder fs-6">$2,309</span>
-                                                <!--end::Number-->
-
-
-                                            </div>
-                                            <!--end::Statistics-->
-                                        </div>
-                                        <div class="separator separator-dashed my-3"></div>
-                                        <!--end::Separator-->
-
-                                        <!--begin::Item-->
-                                        <div class="d-flex flex-stack">
-                                            <!--begin::Section-->
-                                            <div class="text-gray-700 fw-semibold fs-6 me-2">Avg. Agent Earnings</div>
-                                            <!--end::Section-->
-
-                                            <!--begin::Statistics-->
-                                            <div class="d-flex align-items-senter">
-                                                <i class="ki-duotone ki-arrow-up-right fs-2 text-success me-2"><span
-                                                        class="path1"></span><span class="path2"></span></i>
-
-                                                <!--begin::Number-->
-                                                <span class="text-gray-900 fw-bolder fs-6">$2,309</span>
-                                                <!--end::Number-->
-
-
-                                            </div>
-                                            <!--end::Statistics-->
-                                        </div>
-                                        <!--end::Item-->
-
-
-
+                                    <div class="card-body pt-5">
+                                        <!-- Placeholder untuk daftar buku -->
+                                        <div id="most-read-books"></div>
                                     </div>
                                     <!--end::Body-->
                                 </div>
-                                <!--end::Chart widget 32-->
 
 
-                            <!--end::Col-->
-                        </div>
-
-
-                        <div class="card ">
-                            <!--begin::Header-->
-                            <div class="card-header border-0 pt-5">
-                                <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bold fs-3 mb-1">Latest Products</span>
-
-                                    <span class="text-muted mt-1 fw-semibold fs-7">More than 400 new products</span>
-                                </h3>
-                            </div>
-                            <!--end::Header-->
-
-                            <!--begin::Body-->
-                            <div class="card-body py-3">
-                                <div class="tab-content">
-
-                                    <!--begin::Tap pane-->
-                                    <div class="tab-pane fade show active" id="kt_table_widget_5_tab_1" role="tabpanel">
-                                        <!--begin::Table container-->
-                                        <div class="table-responsive">
-                                            <!--begin::Table-->
-                                            <table class="table table-row-dashed table-row-gray-200 align-middle gs-0 gy-4">
-                                                <!--begin::Table head-->
-                                                <thead>
-                                                    <tr class="border-0">
-                                                        <th class="p-0 w-50px"></th>
-                                                        <th class="p-0 min-w-150px"></th>
-                                                        <th class="p-0 min-w-140px"></th>
-                                                        <th class="p-0 min-w-110px"></th>
-                                                        <th class="p-0 min-w-50px"></th>
-                                                    </tr>
-                                                </thead>
-                                                <!--end::Table head-->
-
-                                                <!--begin::Table body-->
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="symbol symbol-45px me-2">
-                                                                <span class="symbol-label">
-                                                                    <img src="/metronic8/demo11/assets/media/svg/brand-logos/plurk.svg"
-                                                                        class="h-50 align-self-center" alt="">
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <a href="#"
-                                                                class="text-gray-900 fw-bold text-hover-primary mb-1 fs-6">Brad
-                                                                Simmons</a>
-                                                            <span class="text-muted fw-semibold d-block">Movie
-                                                                Creator</span>
-                                                        </td>
-                                                        <td class="text-end text-muted fw-bold">
-                                                            React, HTML </td>
-                                                        <td class="text-end">
-                                                            <span class="badge badge-light-success">Approved</span>
-                                                        </td>
-                                                        <td class="text-end">
-                                                            <a href="#"
-                                                                class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
-                                                                <i class="ki-duotone ki-arrow-right fs-2"><span
-                                                                        class="path1"></span><span
-                                                                        class="path2"></span></i> </a>
-                                                        </td>
-                                                    </tr>
-
-                                                </tbody>
-                                                <!--end::Table body-->
-                                            </table>
-                                        </div>
-                                        <!--end::Table-->
+                                <div class="card">
+                                    <!--begin::Header-->
+                                    <div class="card-header border-0 pt-5">
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label fw-bold fs-3 mb-1">Latest Books</span>
+                                            <span class="text-muted mt-1 fw-semibold fs-7">More than 400 new books</span>
+                                        </h3>
                                     </div>
-                                    <!--end::Tap pane-->
-
-                                    <!--end::Tap pane-->
+                                    <!--end::Header-->
+                                
+                                    <!--begin::Body-->
+                                    <div class="card-body py-3">
+                                        <div class="tab-content">
+                                            <!--begin::Tap pane-->
+                                            <div class="tab-pane fade show active" id="kt_table_widget_5_tab_1" role="tabpanel">
+                                                <!--begin::Table container-->
+                                                <div class="table-responsive">
+                                                    <!--begin::Table-->
+                                                    <table class="table table-row-dashed table-row-gray-200 align-middle gs-0 gy-4">
+                                                        <!--begin::Table head-->
+                                                        <thead>
+                                                            <tr class="border-0">
+                                                                <th class="p-0 w-50px"></th>
+                                                                <th class="p-0 min-w-150px">Book Title</th>
+                                                                <th class="p-0 min-w-140px">Author</th>
+                                                                <th class="p-0 min-w-110px">Year</th>
+                                                                <th class="p-0 min-w-50px">Stock</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <!--end::Table head-->
+                                
+                                                        <!--begin::Table body-->
+                                                        <tbody id="latest-books-table">
+                                                            <!-- Data buku akan dimuat di sini -->
+                                                        </tbody>
+                                                        <!--end::Table body-->
+                                                    </table>
+                                                </div>
+                                                <!--end::Table-->
+                                            </div>
+                                            <!--end::Tap pane-->
+                                        </div>
+                                    </div>
+                                    <!--end::Body-->
                                 </div>
-                            </div>
-                            <!--end::Body-->
-                        </div>
                         <!--end::Row-->
 
 
@@ -333,83 +155,191 @@
 @endsection
 @section('script')
     <script>
-        var options = {
-            series: [{
-                name: 'Net Profit',
-                data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-            }, {
-                name: 'Revenue',
-                data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-            }, {
-                name: 'Free Cash Flow',
-                data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-            }],
-            chart: {
-                type: 'bar',
-                height: 350
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '55%',
-                    borderRadius: 5,
-                    borderRadiusApplication: 'end'
+       $(document).ready(function () {
+            // Ambil data dari route /dashboard/data menggunakan AJAX
+            $.ajax({
+                url: "{{ route('dashboard.data') }}",
+                method: "GET",
+                success: function (response) {
+                    // Inisialisasi ApexCharts dengan data yang diterima
+                    var options = {
+                        series: [
+                            {
+                                name: 'Peminjaman',
+                                data: response.totalPeminjaman
+                            },
+                            {
+                                name: 'Pengembalian',
+                                data: response.totalDikembalikan
+                            },
+                            {
+                                name: 'Denda',
+                                data: response.totalDenda
+                            }
+                        ],
+                        chart: {
+                            type: 'bar',
+                            height: 350
+                        },
+                        plotOptions: {
+                            bar: {
+                                horizontal: false,
+                                columnWidth: '55%',
+                                borderRadius: 5,
+                                borderRadiusApplication: 'end'
+                            },
+                        },
+                        dataLabels: {
+                            enabled: false
+                        },
+                        stroke: {
+                            show: true,
+                            width: 2,
+                            colors: ['transparent']
+                        },
+                        xaxis: {
+                            categories: response.months,
+                        },
+                        yaxis: {
+                            title: {
+                                text: 'Jumlah'
+                            }
+                        },
+                        fill: {
+                            opacity: 1
+                        },
+                        tooltip: {
+                            y: {
+                                formatter: function(val) {
+                                    return val + " item"
+                                }
+                            }
+                        }
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart"), options);
+                    chart.render();
                 },
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent']
-            },
-            xaxis: {
-                categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-            },
-            yaxis: {
-                title: {
-                    text: '$ (thousands)'
+                error: function (xhr, status, error) {
+                    console.error("Error fetching data:", error);
                 }
-            },
-            fill: {
-                opacity: 1
-            },
-            tooltip: {
-                y: {
-                    formatter: function(val) {
-                        return "$ " + val + " thousands"
-                    }
+            });
+        });
+
+
+
+        $(document).ready(function () {
+            // Ambil data dari route /dashboard/category-data menggunakan AJAX
+            $.ajax({
+                url: "{{ route('dashboard.category.data') }}",
+                method: "GET",
+                success: function (response) {
+                    // Inisialisasi ApexCharts dengan data yang diterima
+                    var options = {
+                        series: response.totals, // Data jumlah buku
+                        chart: {
+                            width: 380,
+                            type: 'pie',
+                        },
+                        labels: response.categories, // Label kategori
+                        responsive: [{
+                            breakpoint: 480,
+                            options: {
+                                chart: {
+                                    width: 200
+                                },
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart2"), options);
+                    chart.render();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching data:", error);
                 }
+           
+            });
+        });
+
+        $(document).ready(function () {
+        // Ambil data dari route /dashboard/most-read-books menggunakan AJAX
+        $.ajax({
+            url: "{{ route('dashboard.most-read-books') }}",
+            method: "GET",
+            success: function (response) {
+                // Tampilkan data dalam card
+                let html = '';
+                response.forEach(function (book) {
+                    html += `
+                        <div class="d-flex flex-stack mb-5">
+                            <!-- Gambar Buku -->
+                            <div class="symbol symbol-50px me-5">
+                               <img src="${book.gambar}" alt="${book.judul}" class="rounded">
+                            </div>
+
+                            <!-- Detail Buku -->
+                            <div class="d-flex flex-column flex-grow-1">
+                                <span class="text-gray-800 fw-bold fs-6">${book.judul}</span>
+                                <span class="text-gray-600 fw-semibold fs-7">${book.penulis}</span>
+                            </div>
+
+                            <!-- Statistik Peminjaman -->
+                            <div class="d-flex align-items-center">
+                                <span class="badge badge-light-primary fs-7 fw-bold">${book.total_pinjam}x Dipinjam</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Masukkan HTML ke dalam placeholder
+                $('#most-read-books').html(html);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching data:", error);
             }
-        };
+        });
+    });
+    $(document).ready(function () {
+        // Ambil data dari route /dashboard/latest-books menggunakan AJAX
+        $.ajax({
+            url: "{{ route('dashboard.latest-books') }}",
+            method: "GET",
+            success: function (response) {
+                // Tampilkan data dalam tabel
+                let html = '';
+                response.forEach(function (book) {
+                    html += `
+                        <tr>
+                            <td>
+                                <div class="symbol symbol-45px me-2">
+                                    <span class="symbol-label">
+                                        <img src="${book.gambar}" class="h-50 align-self-center" alt="${book.judul}">
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#" class="text-gray-900 fw-bold text-hover-primary mb-1 fs-6">${book.judul}</a>
+                                <span class="text-muted fw-semibold d-block">New Arrival</span>
+                            </td>
+                            <td class="text-end text-muted fw-bold">${book.penulis}</td>
+                            <td class="text-end text-muted fw-bold">${book.tahun_terbit}</td>
+                            <td class="text-end text-muted fw-bold">${book.stok}</td>
+                        </tr>
+                    `;
+                });
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-
-
-
-        var options = {
-            series: [44, 55, 13, 43, 22],
-            chart: {
-                width: 380,
-                type: 'pie',
+                // Masukkan HTML ke dalam placeholder
+                $('#latest-books-table').html(html);
             },
-            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
-        };
-
-        var chart = new ApexCharts(document.querySelector("#chart2"), options);
-        chart.render();
+            error: function (xhr, status, error) {
+                console.error("Error fetching data:", error);
+            }
+        });
+    });
     </script>
+
 @endsection

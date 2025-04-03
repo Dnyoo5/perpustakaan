@@ -58,7 +58,7 @@ class PeminjamanController extends Controller
             ->addColumn('aksi', function ($row) {
                 $id = $row->id;
                 $data = '';
-
+            
                 // Tombol approve hanya muncul jika status pending dan user adalah admin/superadmin
                 if (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin') {
                     if ($row->status == 'pending') {
@@ -67,21 +67,30 @@ class PeminjamanController extends Controller
                         </a>';
                     }
                 }
-
+            
                 // Tombol kembalikan muncul jika status dipinjam dan user adalah member
                 if ($row->status == 'dipinjam' && auth()->user()->role == 'member') {
                     $data .= '<a class="btn btn-sm btn-info btn-icon return-button" data-id="' . $id . '" href="#">
                                   <i class="fa fa-undo"></i>
                               </a>';
                 }
-
-                // Tombol konfirmasi pengembalian muncul jika status menunggu_konfirmasi dan user adalah admin
-                if ($row->status == 'menunggu_konfirmasi' && auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin') {
+            
+                // Tombol konfirmasi pengembalian muncul jika status menunggu_konfirmasi dan user adalah admin/superadmin
+                if ($row->status == 'menunggu_konfirmasi' && (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin')) {
                     $data .= '<a class="btn btn-sm btn-success btn-icon confirm-return-button" data-id="' . $id . '" href="#">
                                   <i class="fa fa-check"></i>
                               </a>';
                 }
-
+            
+                // Pastikan tombol "Menunggu Konfirmasi" tidak muncul jika statusnya pending
+                if ($row->status != 'pending' && $row->status != 'menunggu_konfirmasi') {
+                    if (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin') {
+                        $data .= '<a class="btn btn-sm btn-warning btn-icon waiting-confirmation-button" data-id="' . $id . '" href="#">
+                                      <i class="fa fa-clock"></i>
+                                  </a>';
+                    }
+                }
+            
                 // Tombol edit dan delete hanya muncul jika status pending
                 if ($row->status == 'pending') {
                     $data .= '
@@ -92,9 +101,9 @@ class PeminjamanController extends Controller
                         <i class="fa fa-trash"></i>
                     </a>';
                 }
-
+            
                 return $data;
-            })
+        })
             ->rawColumns(['aksi', 'status_badge'])
             ->make(true);
     }

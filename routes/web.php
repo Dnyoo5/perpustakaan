@@ -30,6 +30,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/data', [DashboardController::class, 'getData'])->name('dashboard.data');
+        Route::get('/category-data', [DashboardController::class, 'getCategoryData'])->name('dashboard.category.data');
+        Route::get('/most-read-books', [DashboardController::class, 'getMostReadBooks'])->name('dashboard.most-read-books');
+        Route::get('/latest-books', [DashboardController::class, 'getLatestBooks'])->name('dashboard.latest-books');
     });
 
     Route::prefix('home')->group(function () {
