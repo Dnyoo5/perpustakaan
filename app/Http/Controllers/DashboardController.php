@@ -15,6 +15,15 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function __construct()
+    {
+        // Terapkan middleware untuk semua fungsi kecuali index
+        $this->middleware('role:admin,superadmin')->except(['index']);
+    }
+
+
     public function index()
     {
         $data['main'] = 'Dashboard';
@@ -85,7 +94,7 @@ class DashboardController extends Controller
             'totals' => $totals,
         ]);
     }
-     public function getMostReadBooks()
+    public function getMostReadBooks()
     {
         // Ambil data buku yang paling sering dipinjam
         $data = Peminjaman::select('buku_id', DB::raw('COUNT(*) as total'))

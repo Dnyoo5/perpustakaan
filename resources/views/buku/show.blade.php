@@ -23,12 +23,12 @@
                 </div>
                 <div class="card-footer">
                     <a href="{{ route('buku') }}" class="btn btn-light">Kembali</a>
-                    <a href="{{ route('buku.show', $buku->id) }}"
-                        class="btn btn-sm btn-success"><i
-                            class="ki-duotone ki-arrow-right-left fs-2 text-light">
+                    <a  href="{{ route('peminjaman.create', $buku->id) }}" class="btn btn-sm btn-success pilih-buku">
+                        <i class="ki-duotone ki-arrow-right-left fs-2 text-light">
                             <span class="path1"></span>
                             <span class="path2"></span>
-                        </i></a>
+                        </i>
+                    </a>
                 </div>
             </div>
         </div>

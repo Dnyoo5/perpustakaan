@@ -109,6 +109,10 @@
                 });
             });
         });
+
+        document.getElementById('logout-button')?.addEventListener('click', function() {
+            document.getElementById('logout-form').submit();
+        });
     </script>
     </script>
     @yield('script')

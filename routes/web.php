@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\homeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PeminjamanController;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [homeController::class, 'index'])->name('home.index');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.form');
 Route::post('/login-form', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'showregister'])->name('register.form');
@@ -29,15 +31,17 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('dashboard')->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/data', [DashboardController::class, 'getData'])->name('dashboard.data');
-        Route::get('/category-data', [DashboardController::class, 'getCategoryData'])->name('dashboard.category.data');
-        Route::get('/most-read-books', [DashboardController::class, 'getMostReadBooks'])->name('dashboard.most-read-books');
-        Route::get('/latest-books', [DashboardController::class, 'getLatestBooks'])->name('dashboard.latest-books');
+        Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+            Route::get('/data', [DashboardController::class, 'getData'])->name('dashboard.data');
+            Route::get('/category-data', [DashboardController::class, 'getCategoryData'])->name('dashboard.category.data');
+            Route::get('/most-read-books', [DashboardController::class, 'getMostReadBooks'])->name('dashboard.most-read-books');
+            Route::get('/latest-books', [DashboardController::class, 'getLatestBooks'])->name('dashboard.latest-books');
+        });
     });
 
     Route::prefix('home')->group(function () {
-        Route::get('/', [LandingController::class, 'index'])->name('home');
+        Route::get('/', [homeController::class, 'index'])->name('home');
     });
 
     Route::prefix('kategori')->group(function () {
