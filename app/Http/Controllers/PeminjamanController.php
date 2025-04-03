@@ -48,6 +48,7 @@ class PeminjamanController extends Controller
                 $badges = [
                     'pending' => '<span class="badge badge-light-warning">Pending</span>',
                     'dipinjam' => '<span class="badge badge-light-primary">Dipinjam</span>',
+                    'menunggu_konfirmasi' => '<span class="badge badge-light-info">Menunggu Konfirmasi</span>',
                     'dikembalikan' => '<span class="badge badge-light-success">Dikembalikan</span>',
                     'denda' => '<span class="badge badge-light-danger">Denda</span>'
                 ];
@@ -67,11 +68,18 @@ class PeminjamanController extends Controller
                     }
                 }
 
-                // Tombol kembalikan muncul jika status dipinjam
-                if ($row->status == 'dipinjam') {
+                // Tombol kembalikan muncul jika status dipinjam dan user adalah member
+                if ($row->status == 'dipinjam' && auth()->user()->role == 'member') {
                     $data .= '<a class="btn btn-sm btn-info btn-icon return-button" data-id="' . $id . '" href="#">
-                        <i class="fa fa-undo"></i>
-                    </a>';
+                                  <i class="fa fa-undo"></i>
+                              </a>';
+                }
+
+                // Tombol konfirmasi pengembalian muncul jika status menunggu_konfirmasi dan user adalah admin
+                if ($row->status == 'menunggu_konfirmasi' && auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin') {
+                    $data .= '<a class="btn btn-sm btn-success btn-icon confirm-return-button" data-id="' . $id . '" href="#">
+                                  <i class="fa fa-check"></i>
+                              </a>';
                 }
 
                 // Tombol edit dan delete hanya muncul jika status pending
@@ -249,20 +257,22 @@ class PeminjamanController extends Controller
     public function return($id)
     {
         $peminjaman = Peminjaman::findOrFail($id);
-        $buku = $peminjaman->buku;
 
-        // Kembalikan stok
-        $buku->stok += $peminjaman->dipinjam;
-        $buku->save();
+        // Pastikan hanya pengguna yang meminjam buku yang dapat mengembalikan
+        if ($peminjaman->user_id !== auth()->id()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Anda tidak memiliki izin untuk mengembalikan buku ini.'
+            ], 403);
+        }
 
-        // Update status dan tanggal pengembalian
-        $peminjaman->status = 'dikembalikan';
-        $peminjaman->tanggal_kembali = now(); // Mengatur tanggal kembali ke hari ini
+        // Ubah status menjadi "menunggu_konfirmasi"
+        $peminjaman->status = 'menunggu_konfirmasi';
         $peminjaman->save();
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Buku berhasil dikembalikan'
+            'message' => 'Pengembalian buku sedang menunggu konfirmasi admin.'
         ]);
     }
 
@@ -275,5 +285,34 @@ class PeminjamanController extends Controller
         }
         $peminjaman->delete();
         return redirect()->route('peminjaman.index')->with('success', 'Data Peminjaman berhasil dihapus.');
+    }
+
+
+    public function confirmReturn($id)
+    {
+        $peminjaman = Peminjaman::findOrFail($id);
+
+        // Pastikan hanya admin atau superadmin yang dapat mengonfirmasi pengembalian
+        if (!in_array(auth()->user()->role, ['admin', 'superadmin'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Anda tidak memiliki izin untuk melakukan tindakan ini.'
+            ], 403);
+        }
+
+        // Kembalikan stok buku
+        $buku = $peminjaman->buku;
+        $buku->stok += $peminjaman->dipinjam;
+        $buku->save();
+
+        // Update status dan tanggal pengembalian
+        $peminjaman->status = 'dikembalikan';
+        $peminjaman->tanggal_kembali = now(); // Mengatur tanggal kembali ke hari ini
+        $peminjaman->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pengembalian buku berhasil dikonfirmasi.'
+        ]);
     }
 }

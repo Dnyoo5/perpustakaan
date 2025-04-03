@@ -10,9 +10,10 @@ class Buku extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['gambar','judul','penulis','kode_buku','tahun_terbit','kategori_id','stok','sinopsis'];
+    protected $fillable = ['gambar', 'judul', 'penulis', 'kode_buku', 'tahun_terbit', 'kategori_id', 'stok', 'sinopsis'];
 
-    public function  peminjaman() {
+    public function  peminjaman()
+    {
         return $this->HasMany(Peminjaman::class);
     }
 }

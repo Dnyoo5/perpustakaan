@@ -227,31 +227,64 @@
             });
 
 
+            $(document).on('click', '.confirm-return-button', function(e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: "Konfirmasi pengembalian buku ini?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, konfirmasi!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `/peminjaman/${id}/confirm-return`,
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Berhasil!',
+                                    response.message,
+                                    'success'
+                                );
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                });
+            });
+
+
 
 
 
         });
 
         $('body').on('click', '.delete-peminjaman', function(e) {
-                e.preventDefault();
-                var url = $(this).attr('href');
-                Swal.fire({
-                    title: 'Konfirmasi',
-                    text: "Anda yakin ingin menghapus kategori ini?",
-                    icon: 'warning',
-                    buttonsStyling: false,
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Tidak, kembali!',
-                    customClass: {
-                        confirmButton: 'btn btn-primary',
-                        cancelButton: 'btn btn-secondary'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = url;
-                    }
-                });
+            e.preventDefault();
+            var url = $(this).attr('href');
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: "Anda yakin ingin menghapus kategori ini?",
+                icon: 'warning',
+                buttonsStyling: false,
+                showCancelButton: true,
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Tidak, kembali!',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-secondary'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
             });
+        });
     </script>
 @endsection

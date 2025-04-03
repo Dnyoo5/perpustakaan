@@ -102,6 +102,15 @@
                                                 class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
                                 </div>
+
+                                <div class="text-gray-500 text-center fw-semibold fs-6">
+                                    Tidak Punya Akun?
+
+                                    <a href="/register" class="link-primary">
+                                        Daftar Disini
+                                    </a>
+                                </div>
+
                             </form>
                         </div>
                     </div>

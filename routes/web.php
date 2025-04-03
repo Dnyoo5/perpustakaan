@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PenggunaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +20,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'showLogin'])->name('login.form');
-Route::post('/', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login.form');
+Route::post('/login-form', [AuthController::class, 'login'])->name('login');
+Route::get('/register', [AuthController::class, 'showregister'])->name('register.form');
+Route::post('/register-form', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
@@ -53,6 +56,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
     });
 
+    Route::prefix('pengguna')->group(function () {
+        Route::get('/', [PenggunaController::class, 'index'])->name('pengguna.index');
+        Route::get('/datatables', [PenggunaController::class, 'datatables'])->name('pengguna.datatables');
+        Route::post('/', [PenggunaController::class, 'store'])->name('pengguna.store');
+        Route::get('/create', [PenggunaController::class, 'create'])->name('pengguna.create');
+        Route::get('/show/{id}', [PenggunaController::class, 'show'])->name('pengguna.show');
+        Route::get('/edit/{id}', [PenggunaController::class, 'edit'])->name('pengguna.edit');
+        Route::put('/{id}', [PenggunaController::class, 'update'])->name('pengguna.update');
+        Route::get('/detail/{id}', [PenggunaController::class, 'show'])->name('pengguna.detail');
+        Route::get('/destroy/{id}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
+    });
+
 
     Route::prefix('peminjaman')->group(function () {
         Route::get('/', [PeminjamanController::class, 'index'])->name('peminjaman.index');
@@ -67,7 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{id}/approve', [PeminjamanController::class, 'approve'])->name('peminjaman.approve');
         Route::post('/{id}/return', [PeminjamanController::class, 'return'])->name('peminjaman.return');
         Route::post('/check-stok', [PeminjamanController::class, 'checkStok'])->name('peminjaman.checkStok');
-
+        Route::post('/{id}/confirm-return', [PeminjamanController::class, 'confirmReturn'])->name('peminjaman.confirmReturn');
     });
 
 });

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\UpdatePeminjamanDendaJob;
 use Illuminate\Console\Command;
 use App\Models\Peminjaman;
 
@@ -26,15 +27,7 @@ class UpdatePeminjamanDenda extends Command
      */
     public function handle()
     {
-        $peminjaman = Peminjaman::where('status', 'disetujui')
-            ->where('tanggal_kembali', '<', now())
-            ->get();
-
-        foreach ($peminjaman as $pinjam) {
-            $pinjam->status = 'denda';
-            $pinjam->save();
-        }
-
-        $this->info('Status peminjaman yang melewati batas waktu telah diperbarui ke "denda".');
+        UpdatePeminjamanDendaJob::dispatch(); // Menjalankan job
+        $this->info("Job untuk memperbarui status peminjaman ke 'denda' telah dikirim.");
     }
 }
