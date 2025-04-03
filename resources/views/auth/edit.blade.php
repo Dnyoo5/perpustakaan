@@ -1,6 +1,6 @@
 @extends('master.master')
 @section('title')
-    SAPRAS | Edit Pengguna
+ PERPUSTAKAAN | Edit Pengguna
 @endsection
 
 @section('content')

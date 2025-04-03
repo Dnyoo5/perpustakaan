@@ -1,4 +1,7 @@
 @extends('master.master')
+@section('title')
+ PERPUSTAKAAN | DASHBOARD
+@endsection
 
 @section('content')
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
@@ -278,7 +281,8 @@
                         <div class="d-flex flex-stack mb-5">
                             <!-- Gambar Buku -->
                             <div class="symbol symbol-50px me-5">
-                               <img src="${book.gambar}" alt="${book.judul}" class="rounded">
+                         <img src="${book.gambar}" alt="${book.judul}" class="rounded">
+                        
                             </div>
 
                             <!-- Detail Buku -->

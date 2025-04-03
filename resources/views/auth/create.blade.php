@@ -1,6 +1,6 @@
 @extends('master.master')
 @section('title')
-    SAPRAS | Tambah Barang
+ PERPUSTAKAAN | CREATE PENGGUNA
 @endsection
 
 @section('content')

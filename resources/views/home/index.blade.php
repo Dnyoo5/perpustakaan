@@ -1,4 +1,7 @@
 @extends('master.master')
+@section('title')
+ PERPUSTAKAAN | HOME
+@endsection
 @section('content')
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <!--begin::Post-->
