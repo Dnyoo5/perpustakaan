@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PeminjamanController extends Controller
 {
+
     public function index()
     {
+        $user = Auth::user();
+
+        // Cek role
+        if ($user->role === 'member') {
+            return view('home.peminjaman');
+        }
+
+        // Default untuk admin/superadmin
         $data['main'] = 'Peminjaman';
         $data['sub']  = 'Home';
-        $data['sub1']  = 'Peminjaman Home';
+        $data['sub1'] = 'Peminjaman Home';
 
         return view('peminjaman-buku.index', $data);
     }
@@ -58,7 +68,7 @@ class PeminjamanController extends Controller
             ->addColumn('aksi', function ($row) {
                 $id = $row->id;
                 $data = '';
-            
+
                 // Tombol approve hanya muncul jika status pending dan user adalah admin/superadmin
                 if (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin') {
                     if ($row->status == 'pending') {
@@ -67,21 +77,21 @@ class PeminjamanController extends Controller
                         </a>';
                     }
                 }
-            
+
                 // Tombol kembalikan muncul jika status dipinjam dan user adalah member
                 if ($row->status == 'dipinjam' && auth()->user()->role == 'member') {
                     $data .= '<a class="btn btn-sm btn-info btn-icon return-button" data-id="' . $id . '" href="#">
                                   <i class="fa fa-undo"></i>
                               </a>';
                 }
-            
+
                 // Tombol konfirmasi pengembalian muncul jika status menunggu_konfirmasi dan user adalah admin/superadmin
                 if ($row->status == 'menunggu_konfirmasi' && (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin')) {
                     $data .= '<a class="btn btn-sm btn-success btn-icon confirm-return-button" data-id="' . $id . '" href="#">
                                   <i class="fa fa-check"></i>
                               </a>';
                 }
-            
+
                 // Pastikan tombol "Menunggu Konfirmasi" tidak muncul jika statusnya pending
                 if ($row->status != 'pending' && $row->status != 'menunggu_konfirmasi') {
                     if (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin') {
@@ -90,7 +100,7 @@ class PeminjamanController extends Controller
                                   </a>';
                     }
                 }
-            
+
                 // Tombol edit dan delete hanya muncul jika status pending
                 if ($row->status == 'pending') {
                     $data .= '
@@ -101,9 +111,98 @@ class PeminjamanController extends Controller
                         <i class="fa fa-trash"></i>
                     </a>';
                 }
-            
+
                 return $data;
-        })
+            })
+            ->rawColumns(['aksi', 'status_badge'])
+            ->make(true);
+    }
+
+    public function datatablesMember(Request $request)
+    {
+        // Mulai query peminjaman
+        $peminjaman = DB::table('peminjamen')
+            ->join('users', 'peminjamen.user_id', '=', 'users.id')
+            ->join('bukus', 'peminjamen.buku_id', '=', 'bukus.id')
+            ->select(
+                'peminjamen.id as id',
+                'users.nama as nama_peminjam',
+                'bukus.kode_buku as kode_buku',
+                'peminjamen.tanggal_pinjam as tanggal_pinjam',
+                'peminjamen.tanggal_kembali as tanggal_kembali',
+                'peminjamen.status as status'
+            )
+            ->where('peminjamen.status', '<>', 'dikembalikan'); // Hanya selain status dikembalikan
+
+        // Cek peran pengguna dan filter data sesuai peran
+        if (auth()->user()->role != 'admin' && auth()->user()->role != 'superadmin') {
+            // Jika bukan admin/superadmin, tampilkan hanya data yang dimiliki oleh pengguna
+            $peminjaman->where('peminjamen.user_id', auth()->user()->id);
+        }
+
+        return datatables()
+            ->of($peminjaman)
+            ->addIndexColumn()
+            ->addColumn('status_badge', function ($row) {
+                $badges = [
+                    'pending' => '<span class="badge badge-light-warning">Pending</span>',
+                    'dipinjam' => '<span class="badge badge-light-primary">Dipinjam</span>',
+                    'menunggu_konfirmasi' => '<span class="badge badge-light-info">Menunggu Konfirmasi</span>',
+                    'dikembalikan' => '<span class="badge badge-light-success">Dikembalikan</span>',
+                    'denda' => '<span class="badge badge-light-danger">Denda</span>'
+                ];
+
+                return $badges[$row->status] ?? '<span class="badge badge-light-secondary">Unknown</span>';
+            })
+            ->addColumn('aksi', function ($row) {
+                $id = $row->id;
+                $data = '';
+
+                // Tombol approve hanya muncul jika status pending dan user adalah admin/superadmin
+                if (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin') {
+                    if ($row->status == 'pending') {
+                        $data .= '<a class="btn btn-sm btn-success btn-icon approve-button" data-id="' . $id . '" href="#">
+                            <i class="fa fa-check"></i>
+                        </a>';
+                    }
+                }
+
+                // Tombol kembalikan muncul jika status dipinjam dan user adalah member
+                if ($row->status == 'dipinjam' && auth()->user()->role == 'member') {
+                    $data .= '<a class="btn btn-sm btn-info btn-icon return-button" data-id="' . $id . '" href="#">
+                                  <i class="fa fa-undo"></i>
+                              </a>';
+                }
+
+                // Tombol konfirmasi pengembalian muncul jika status menunggu_konfirmasi dan user adalah admin/superadmin
+                if ($row->status == 'menunggu_konfirmasi' && (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin')) {
+                    $data .= '<a class="btn btn-sm btn-success btn-icon confirm-return-button" data-id="' . $id . '" href="#">
+                                  <i class="fa fa-check"></i>
+                              </a>';
+                }
+
+                // Pastikan tombol "Menunggu Konfirmasi" tidak muncul jika statusnya pending
+                if ($row->status != 'pending' && $row->status != 'menunggu_konfirmasi') {
+                    if (auth()->user()->role == 'admin' || auth()->user()->role == 'superadmin') {
+                        $data .= '<a class="btn btn-sm btn-warning btn-icon waiting-confirmation-button" data-id="' . $id . '" href="#">
+                                      <i class="fa fa-clock"></i>
+                                  </a>';
+                    }
+                }
+
+                // Tombol edit dan delete hanya muncul jika status pending
+                if ($row->status == 'pending') {
+                    $data .= '
+                    <a class="btn btn-sm btn-primary btn-icon edit-button" data-id="' . $id . '" href="' . route('peminjaman.edit', $id) . '">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a class="btn btn-sm btn-danger btn-icon delete-peminjaman" data-id="' . $id . '" href="' . route('peminjaman.destroy', $id) . '">
+                        <i class="fa fa-trash"></i>
+                    </a>';
+                }
+
+                return $data;
+            })
             ->rawColumns(['aksi', 'status_badge'])
             ->make(true);
     }
@@ -112,6 +211,12 @@ class PeminjamanController extends Controller
 
     public function melihat()
     {
+        $user = Auth::user();
+
+        if ($user->role === 'member') {
+            return view('home.riwayat');
+        }
+
         $data['main'] = 'Peminjaman';
         $data['sub']  = 'Riwayat';
         $data['sub1']  = 'Peminjaman Riwayat';
@@ -150,28 +255,45 @@ class PeminjamanController extends Controller
 
     public function create($id = null)
     {
+        $user = Auth::user();
+
+        // Cek jika user adalah member
+        if ($user->role === 'member') {
+            // Ambil data user dan buku (jika ada)
+            $data['user'] = $user;
+
+            if ($id) {
+                $buku = Buku::find($id);
+
+                if ($buku) {
+                    $data['buku'] = $buku;
+                } else {
+                    return redirect()->route('buku')->with('error', 'Buku tidak ditemukan.');
+                }
+            }
+
+            return view('home.peminjaman-create', $data);
+        }
+
+        // Kalau bukan member (admin atau superadmin)
         $data['main'] = 'Tambah Peminjaman';
         $data['sub'] = 'Tambah';
         $data['sub1'] = 'Tambah Peminjaman';
+        $data['user'] = $user;
 
-        // Ambil data user yang sedang login
-        $data['user'] = auth()->user();
-
-        // Jika id_buku ada, cari data buku
         if ($id) {
             $buku = Buku::find($id);
 
-            // Jika buku ditemukan, tambahkan ke data yang dikirim ke view
             if ($buku) {
                 $data['buku'] = $buku;
             } else {
-                // Jika buku tidak ditemukan, redirect dengan pesan error
                 return redirect()->route('peminjaman.index')->with('error', 'Buku tidak ditemukan.');
             }
         }
 
         return view('peminjaman-buku.tambah-peminjaman', $data);
     }
+
 
     public function checkStok(Request $request)
     {

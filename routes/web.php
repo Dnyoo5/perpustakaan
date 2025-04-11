@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\BukuMemberController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\KategoriController;
@@ -64,6 +65,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
     });
 
+    Route::prefix('buku-member')->group(function () {
+        Route::get('/', [BukuMemberController::class, 'index'])->name('buku-landing');
+        Route::get('/show/{id}', [BukuMemberController::class, 'show'])->name('buku-member.show');
+    });
+
     Route::prefix('pengguna')->group(function () {
         Route::get('/', [PenggunaController::class, 'index'])->name('pengguna.index');
         Route::get('/datatables', [PenggunaController::class, 'datatables'])->name('pengguna.datatables');
@@ -93,4 +99,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{id}/confirm-return', [PeminjamanController::class, 'confirmReturn'])->name('peminjaman.confirmReturn');
     });
 
+    Route::prefix('peminjaman-member')->group(function () {
+        Route::get('/', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+        Route::get('/riwayat', [PeminjamanController::class, 'riwayat'])->name('peminjaman.riwayat');
+        Route::get('/melihat', [PeminjamanController::class, 'melihat'])->name('peminjaman.riwayat.index');
+        Route::get('/datatables-member', [PeminjamanController::class, 'datatablesMember'])->name('peminjaman.member.datatables');
+        Route::post('/{id}/return', [PeminjamanController::class, 'return'])->name('peminjaman.return');
+    });
 });
