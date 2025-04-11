@@ -1,7 +1,21 @@
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Metronic
+Product Version: 8.2.3
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
 <html lang="en">
+<!--begin::Head-->
 
 <head>
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Metronic - The World's #1 Selling Bootstrap Admin Template by KeenThemes</title>
     <meta charset="utf-8" />
     <meta name="description"
         content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
@@ -13,59 +27,80 @@
     <meta property="og:title" content="Metronic - The World's #1 Selling Bootstrap Admin Template by KeenThemes" />
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Metronic by Keenthemes" />
-    <link rel="canonical" href="http://preview.keenthemes.comindex.html" />
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
-        type="text/css" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script>
-        if (window.top != window.self) {
-            window.top.location.replace(window.self.location.href);
-        }
+        // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }
     </script>
 </head>
+<!--end::Head-->
+<!--begin::Body-->
 
-<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
-<style>
-    tr {
-        padding: 10px !important;
-    }
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative">
+    <!--begin::Theme mode setup on page load-->
+    <script>
+        var defaultThemeMode = "light";
+        var themeMode;
+        if (document.documentElement) {
+            if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+                themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+            } else {
+                if (localStorage.getItem("data-bs-theme") !== null) {
+                    themeMode = localStorage.getItem("data-bs-theme");
+                } else {
+                    themeMode = defaultThemeMode;
+                }
+            }
+            if (themeMode === "system") {
+                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-bs-theme", themeMode);
+        }
+    </script>
 
-    th {
-        color: white !important;
-        padding: 15px !important;
-        font-weight: bold !important;
-        vertical-align: middle !important;
-    }
+    <style>
+        tr {
+            padding: 10px !important;
+        }
+
+        th {
+            color: white !important;
+            padding: 15px !important;
+            font-weight: bold !important;
+            vertical-align: middle !important;
+        }
+
+
+        td {
+            padding: 15px !important;
+            vertical-align: middle !important;
+            font-size: 13px !important;
+        }
+
+        .menu-arrow {
+            color: white !important;
+        }
+
+        .bullet-dot {
+            background-color: white !important;
+        }
+
+        .bg-primary {
+            background-color: rgb(54, 13, 60) !important;
+        }
+    </style>
 
 
 
+    <div class="d-flex flex-column flex-root">
+        @include('master-landing.header')
+        @yield('content-landing')
+    </div>
 
-    td {
-        padding: 15px !important;
-        vertical-align: middle !important;
-        font-size: 13px !important;
-    }
-
-    .menu-arrow {
-        color: white !important;
-    }
-
-    .bullet-dot {
-        background-color: white !important;
-    }
-</style>
-
-    @include('master.header')
-    @include('master.breadcrumb')
-
-
-    @yield('content')
 
     <script>
         var hostUrl = "{{ asset('assets/') }}";
@@ -91,33 +126,17 @@
     <script src="{{ asset('assets/js/custom/utilities/modals/offer-a-deal/main.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#logout-button').on('click', function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Konfirmasi Logout',
-                    text: 'Apakah Anda Yakin Akan Logout?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, Logout',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $('#logout-form').submit();
-                    }
-                });
-            });
-        });
+    <!--begin::Vendors Javascript (used for this page only)-->
+    <script src="{{ asset('assets/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
+    <script src="{{ asset('assets/plugins/custom/typedjs/typedjs.bundle.js') }}"></script>
+    <!--end::Vendors Javascript-->
 
-        document.getElementById('logout-button')?.addEventListener('click', function() {
-            document.getElementById('logout-form').submit();
-        });
-    </script>
-    </script>
-    @yield('script')
+    <!--begin::Custom Javascript (used for this page only)-->
+    <script src="{{ asset('assets/js/custom/landing.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/pages/pricing/general.js') }}"></script>
+
+    @yield('script-landing')
+    <!--end::Custom Javascript-->
 </body>
 
 </html>
