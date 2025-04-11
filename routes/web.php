@@ -91,6 +91,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{id}/return', [PeminjamanController::class, 'return'])->name('peminjaman.return');
         Route::post('/check-stok', [PeminjamanController::class, 'checkStok'])->name('peminjaman.checkStok');
         Route::post('/{id}/confirm-return', [PeminjamanController::class, 'confirmReturn'])->name('peminjaman.confirmReturn');
+
+
+       
     });
 
 });

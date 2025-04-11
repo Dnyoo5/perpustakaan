@@ -60,14 +60,10 @@
             <div class="d-flex flex-lg-row-fluid">
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
                     <img class=" mx-auto mw-100 w-50px w-lg-350px mb-10 mb-lg-20"
-                        src="{{ asset('assets/media/svg/social-logos/gambar.png') }}" alt="" />
-                    <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">Fast, Efficient and Productive</h1>
-                    <div class="text-gray-600 fs-base text-center fw-semibold">In this kind of post,
-                        <a href="#" class="opacity-75-hover text-primary me-1">the blogger</a>introduces a person
-                        they’ve interviewed
-                        <br />and provides some background information about
-                        <a href="#" class="opacity-75-hover text-primary me-1">the interviewee</a>and their
-                        <br />work following this is a transcript of the interview.
+                        src="{{ asset('assets/media/svg/social-logos/buku1.png') }}" alt="" />
+                    <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">Toshokan</h1>
+                    <div class="text-gray-600 fs-base text-center fw-semibold">Perpustakaan sangat tenang dan merupakan tempat yang baik untuk belajar. Ada banyak buku dan majalah, dan siapa saja bisa membacanya dengan bebas.
+                         Bagi para pelajar, perpustakaan adalah tempat yang sangat penting.
                     </div>
                 </div>
             </div>

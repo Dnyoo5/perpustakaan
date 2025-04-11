@@ -18,7 +18,7 @@
                         </div>
                         <a
                             href="{{ auth()->check() && in_array(auth()->user()->role, ['admin', 'superadmin']) ? route('dashboard') : route('home') }}">
-                            <h3>PERPUSTAKAAN</h3>
+                            <<h3>PERPUSTAKAAN</h3>
                         </a>
                     </div>
                     <div class="d-flex align-items-center flex-shrink-0">
