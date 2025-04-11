@@ -41,7 +41,7 @@
                                 <div class="menu-item">
                                     <!--begin::Menu link-->
                                     <a class="menu-link nav-link active py-3 px-4 px-xxl-6"
-                                        href="{{ route('home') }}">Home</a>
+                                        href="{{ route('home') }}">Beranda</a>
                                     <!--end::Menu link-->
                                 </div>
                                 <!--end::Menu item-->
